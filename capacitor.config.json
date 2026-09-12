@@ -1,0 +1,8 @@
+{
+  "appId": "com.mathnote.app",
+  "appName": "수학 오답노트",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
+}

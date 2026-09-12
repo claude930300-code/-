@@ -1,0 +1,15 @@
+{
+  "name": "math-error-note",
+  "version": "1.0.0",
+  "description": "수학 오답노트 Android 앱",
+  "scripts": {
+    "sync": "cap sync android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.1.2",
+    "@capacitor/core": "^6.1.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.1.2"
+  }
+}
