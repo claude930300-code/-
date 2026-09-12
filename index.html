@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>📚 수학 오답노트</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="오답노트">
+<meta name="theme-color" content="#d9784f">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23d9784f'/%3E%3Ctext x='50' y='64' font-size='52' text-anchor='middle'%3E📚%3C/text%3E%3C/svg%3E">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js" async></script>
+<style>
+:root{
+  --bg:#faf7f2;
+  --card:#ffffff;
+  --ink:#2c2a26;
+  --sub:#8a8375;
+  --line:#ece7dd;
+  --accent:#d9784f;
+  --accent-ink:#ffffff;
+  --accent-soft:#fbe8dd;
+  --green:#5c8a63;
+  --green-soft:#e6f0e3;
+  --red:#c1594a;
+  --red-soft:#fbe6e1;
+  --blue:#4a7ab5;
+  --blue-soft:#e6edf7;
+  --radius:16px;
+  --shadow:0 2px 10px rgba(60,50,30,0.07);
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  padding-bottom:90px;
+  -webkit-text-size-adjust:100%;
+}
+.app{max-width:640px;margin:0 auto;padding:0 14px;}
+header.top{
+  position:sticky;top:0;z-index:20;
+  background:var(--bg);
+  padding:14px 0 8px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--line);
+}
+header.top h1{font-size:19px;margin:0;font-weight:800;}
+.icon-btn{
+  border:none;background:var(--card);width:38px;height:38px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:17px;
+  box-shadow:var(--shadow);cursor:pointer;
+}
+.tabbar{
+  display:flex;gap:6px;overflow-x:auto;padding:10px 0;
+  scrollbar-width:none;
+}
+.tabbar::-webkit-scrollbar{display:none;}
+.tab{
+  flex:0 0 auto;padding:8px 14px;border-radius:999px;border:1px solid var(--line);
+  background:var(--card);color:var(--sub);font-size:13.5px;font-weight:600;cursor:pointer;
+  white-space:nowrap;
+}
+.tab.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+.searchbar{
+  display:flex;gap:8px;margin:6px 0 14px;
+}
+.searchbar input{
+  flex:1;padding:11px 14px;border-radius:12px;border:1px solid var(--line);
+  background:var(--card);font-size:14px;color:var(--ink);
+}
+.searchbar input:focus{outline:2px solid var(--accent-soft);}
+.filter-row{display:flex;gap:6px;overflow-x:auto;margin-bottom:14px;scrollbar-width:none;}
+.filter-row::-webkit-scrollbar{display:none;}
+.chip{
+  flex:0 0 auto;padding:6px 12px;border-radius:999px;font-size:12.5px;
+  background:var(--card);border:1px solid var(--line);color:var(--sub);cursor:pointer;
+}
+.chip.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+.stat-card{
+  background:var(--card);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:22px;font-weight:800;color:var(--accent);}
+.stat-card .label{font-size:12.5px;color:var(--sub);margin-top:2px;}
+.stat-list{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px;margin-bottom:12px;}
+.stat-list h3{margin:0 0 10px;font-size:14px;}
+.stat-list .row{display:flex;justify-content:space-between;padding:6px 0;font-size:13.5px;border-bottom:1px solid var(--line);}
+.stat-list .row:last-child{border-bottom:none;}
+.card{
+  background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);
+  margin-bottom:14px;overflow:hidden;border:1px solid var(--line);
+}
+.card-head{
+  display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;
+}
+.card-head .badge{
+  font-size:11px;font-weight:700;background:var(--accent-soft);color:var(--accent);
+  padding:3px 9px;border-radius:999px;flex:0 0 auto;
+}
+.card-head .meta{flex:1;min-width:0;}
+.card-head .meta .title{font-size:13.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.card-head .meta .sub{font-size:11.5px;color:var(--sub);margin-top:2px;}
+.card-head .chev{color:var(--sub);font-size:13px;transition:transform .15s;}
+.card.open .chev{transform:rotate(180deg);}
+.card-body{display:none;padding:0 14px 16px;}
+.card.open .card-body{display:block;}
+.card-body img.problem-img{width:100%;border-radius:12px;margin-bottom:12px;display:block;}
+.sec{margin-bottom:12px;}
+.sec .sec-label{font-size:11.5px;font-weight:800;color:var(--sub);margin-bottom:4px;letter-spacing:.02em;}
+.sec .sec-body{font-size:14px;line-height:1.6;white-space:pre-wrap;}
+.sec.answer .sec-body{color:var(--green);font-weight:700;}
+.sec.wrong .sec-body{color:var(--red-ink,#8a3d31);background:var(--red-soft);padding:9px 11px;border-radius:10px;}
+.sec.concept .sec-body{background:var(--blue-soft);padding:9px 11px;border-radius:10px;}
+.sec.caution .sec-body{background:#fff6e2;padding:9px 11px;border-radius:10px;}
+.card-foot{display:flex;gap:8px;margin-top:4px;}
+.small-btn{
+  border:none;background:var(--bg);border:1px solid var(--line);padding:7px 11px;border-radius:9px;
+  font-size:12px;color:var(--sub);cursor:pointer;font-weight:600;
+}
+.small-btn.danger{color:var(--red);}
+.empty{
+  text-align:center;padding:60px 20px;color:var(--sub);
+}
+.empty .big{font-size:40px;margin-bottom:10px;}
+.fab{
+  position:fixed;bottom:22px;left:50%;transform:translateX(-50%);
+  background:var(--accent);color:#fff;border:none;padding:15px 26px;border-radius:999px;
+  font-size:15px;font-weight:800;box-shadow:0 6px 18px rgba(217,120,79,0.4);cursor:pointer;
+  display:flex;align-items:center;gap:8px;z-index:30;max-width:calc(100% - 40px);
+}
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(30,26,20,0.5);z-index:100;
+  display:flex;align-items:flex-end;justify-content:center;
+}
+.modal-overlay.center{align-items:center;padding:16px;}
+.modal{
+  background:var(--bg);width:100%;max-width:640px;border-radius:20px 20px 0 0;
+  padding:18px 18px 26px;max-height:88vh;overflow-y:auto;
+}
+.modal-overlay.center .modal{border-radius:18px;max-height:85vh;}
+.modal h2{margin:0 0 14px;font-size:17px;}
+.modal .close-x{float:right;border:none;background:none;font-size:20px;color:var(--sub);cursor:pointer;}
+.field{margin-bottom:14px;}
+.field label{display:block;font-size:12.5px;font-weight:700;color:var(--sub);margin-bottom:6px;}
+.field input[type=text],.field input[type=password],.field select,.field textarea{
+  width:100%;padding:11px 13px;border-radius:11px;border:1px solid var(--line);
+  font-size:14px;background:#fff;color:var(--ink);font-family:inherit;
+}
+.field textarea{min-height:70px;resize:vertical;}
+.upload-box{
+  border:2px dashed var(--line);border-radius:14px;padding:26px 14px;text-align:center;
+  color:var(--sub);cursor:pointer;background:#fff;
+}
+.upload-box img{max-width:100%;max-height:220px;border-radius:10px;}
+.primary-btn{
+  width:100%;padding:14px;border:none;border-radius:13px;background:var(--ink);color:#fff;
+  font-size:15px;font-weight:800;cursor:pointer;margin-top:6px;
+}
+.primary-btn:disabled{opacity:.5;}
+.secondary-btn{
+  width:100%;padding:13px;border:1px solid var(--line);border-radius:13px;background:#fff;color:var(--ink);
+  font-size:14.5px;font-weight:700;cursor:pointer;margin-top:8px;
+}
+.progress-wrap{padding:30px 10px;text-align:center;}
+.progress-wrap .spin{
+  width:38px;height:38px;border:4px solid var(--line);border-top-color:var(--accent);
+  border-radius:50%;margin:0 auto 16px;animation:spin 0.8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+.progress-steps{text-align:left;max-width:280px;margin:0 auto;}
+.progress-steps .step{
+  display:flex;align-items:center;gap:10px;padding:7px 0;font-size:13.5px;color:var(--sub);
+}
+.progress-steps .step.active{color:var(--ink);font-weight:700;}
+.progress-steps .step.done{color:var(--green);}
+.progress-steps .dot{width:8px;height:8px;border-radius:50%;background:var(--line);flex:0 0 auto;}
+.progress-steps .step.active .dot{background:var(--accent);}
+.progress-steps .step.done .dot{background:var(--green);}
+.warn-box{background:#fff6e2;border-radius:12px;padding:12px 14px;font-size:13.5px;margin-bottom:14px;color:#7a5c1e;}
+.error-box{background:var(--red-soft);border-radius:12px;padding:12px 14px;font-size:13.5px;margin-bottom:14px;color:#8a3d31;}
+.review-q{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;margin-bottom:14px;}
+.review-q img{width:100%;border-radius:12px;margin:10px 0;}
+.toast{
+  position:fixed;bottom:100px;left:50%;transform:translateX(-50%);
+  background:var(--ink);color:#fff;padding:11px 18px;border-radius:999px;font-size:13px;
+  z-index:200;opacity:0;transition:opacity .25s;pointer-events:none;
+}
+.toast.show{opacity:1;}
+.settings-note{font-size:12px;color:var(--sub);line-height:1.6;margin-top:4px;}
+a{color:var(--accent);}
+.duo-btns{display:flex;gap:8px;margin-top:10px;}
+.duo-btns button{flex:1;}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <h1>📚 수학 오답노트</h1>
+    <button class="icon-btn" id="btnSettings" title="설정">⚙️</button>
+  </header>
+
+  <div class="tabbar" id="tabbar">
+    <div class="tab active" data-tab="all">전체 오답</div>
+    <div class="tab" data-tab="recent">최근 오답</div>
+    <div class="tab" data-tab="unit">단원별</div>
+    <div class="tab" data-tab="mistake">자주 틀리는 유형</div>
+    <div class="tab" data-tab="review">오늘 복습하기</div>
+  </div>
+
+  <div id="viewArea"></div>
+</div>
+
+<button class="fab" id="btnAdd">📸 문제 추가</button>
+
+<!-- 문제 추가 모달 -->
+<div class="modal-overlay" id="addModal" style="display:none;">
+  <div class="modal">
+    <button class="close-x" data-close="addModal">✕</button>
+    <h2>📸 문제 추가</h2>
+    <div id="addStep1">
+      <div class="field">
+        <label>문제 사진</label>
+        <div class="upload-box" id="uploadBox">
+          <div id="uploadPlaceholder">탭해서 사진을 촬영하거나 선택하세요</div>
+          <img id="previewImg" style="display:none;">
+        </div>
+        <input type="file" id="fileInput" accept="image/*" capture="environment" style="display:none;">
+      </div>
+      <div class="field">
+        <label>내가 쓴 답 (선택 — 적어두면 틀린 이유를 더 정확히 분석해요)</label>
+        <input type="text" id="userAnswerInput" placeholder="예: x=3 이라고 썼어요">
+      </div>
+      <button class="primary-btn" id="btnAnalyze" disabled>🤖 AI로 분석 시작</button>
+    </div>
+    <div id="addStep2" style="display:none;">
+      <div class="progress-wrap">
+        <div class="spin"></div>
+        <div class="progress-steps" id="progressSteps"></div>
+      </div>
+    </div>
+    <div id="addStep3" style="display:none;"></div>
+  </div>
+</div>
+
+<!-- 설정 모달 -->
+<div class="modal-overlay center" id="settingsModal" style="display:none;">
+  <div class="modal">
+    <button class="close-x" data-close="settingsModal">✕</button>
+    <h2>⚙️ 설정</h2>
+    <div class="field">
+      <label>Anthropic API 키</label>
+      <input type="password" id="apiKeyInput" placeholder="sk-ant-...">
+      <div class="settings-note">API 키는 이 기기의 브라우저 안(localStorage)에만 저장되며 외부로 전송되지 않습니다. 키가 없다면 <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>에서 발급받으세요.</div>
+    </div>
+    <div class="field">
+      <label>사용할 모델</label>
+      <select id="modelSelect">
+        <option value="claude-sonnet-5">claude-sonnet-5 (권장, 균형)</option>
+        <option value="claude-opus-5">claude-opus-5 (가장 정확, 느림/비쌈)</option>
+        <option value="claude-haiku-4-5-20251001">claude-haiku-4-5 (가장 빠름/저렴)</option>
+      </select>
+    </div>
+    <button class="primary-btn" id="btnSaveSettings">저장</button>
+    <hr style="border:none;border-top:1px solid var(--line);margin:18px 0;">
+    <h2 style="font-size:15px;">💾 백업 / 내보내기</h2>
+    <button class="secondary-btn" id="btnExportJson">JSON으로 내보내기</button>
+    <button class="secondary-btn" id="btnExportCsv">CSV로 내보내기</button>
+    <button class="secondary-btn" id="btnExportMd">Markdown 노트로 내보내기</button>
+    <button class="secondary-btn" id="btnExportPdf">🖨️ 전체 노트 인쇄/PDF로 저장</button>
+    <div class="field" style="margin-top:14px;">
+      <label>JSON 백업 불러오기 (복원)</label>
+      <input type="file" id="importJsonInput" accept="application/json">
+    </div>
+    <div class="settings-note">모든 오답 데이터와 사진은 이 브라우저(localStorage)에만 저장됩니다. 기기를 바꾸거나 브라우저 데이터를 지우면 사라지므로, 주기적으로 JSON 백업을 받아두는 것을 권장합니다.</div>
+  </div>
+</div>
+
+<!-- 상세/복습 모달 -->
+<div class="modal-overlay" id="detailModal" style="display:none;">
+  <div class="modal" id="detailModalBody"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* =========================================================
+   저장소 레이어
+========================================================= */
+const STORAGE_KEY = 'moj_problems_v1';
+const SETTINGS_KEY = 'moj_settings_v1';
+
+function loadProblems(){
+  try{ return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
+  catch(e){ return []; }
+}
+function saveProblems(list){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+}
+function loadSettings(){
+  try{ return JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}'); }
+  catch(e){ return {}; }
+}
+function saveSettings(s){
+  localStorage.setItem(SETTINGS_KEY, JSON.stringify(s));
+}
+
+let PROBLEMS = loadProblems();
+let SETTINGS = loadSettings();
+
+function nextId(){
+  if(PROBLEMS.length === 0) return 1;
+  return Math.max(...PROBLEMS.map(p => p.id)) + 1;
+}
+
+/* =========================================================
+   유틸
+========================================================= */
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=> t.classList.remove('show'), 2200);
+}
+function fmtDate(iso){
+  const d = new Date(iso);
+  return `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
+}
+function daysAgo(iso){
+  return (Date.now() - new Date(iso).getTime()) / 86400000;
+}
+function djb2(str){
+  let hash = 5381;
+  for(let i=0;i<str.length;i++){
+    hash = ((hash << 5) + hash) + str.charCodeAt(i);
+    hash = hash & hash;
+  }
+  return String(hash);
+}
+function tokenize(text){
+  return (text || '').toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').split(' ').filter(Boolean);
+}
+function jaccardSimilarity(a, b){
+  const ta = new Set(tokenize(a));
+  const tb = new Set(tokenize(b));
+  if(ta.size === 0 || tb.size === 0) return 0;
+  let inter = 0;
+  for(const t of ta) if(tb.has(t)) inter++;
+  const union = new Set([...ta, ...tb]).size;
+  return inter / union;
+}
+function escapeHtml(s){
+  return (s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function typesetMath(){
+  if(window.MathJax && window.MathJax.typesetPromise){
+    window.MathJax.typesetPromise();
+  }
+}
+function compressImage(dataUrl, maxWidth=900, quality=0.72){
+  return new Promise((resolve)=>{
+    const img = new Image();
+    img.onload = () => {
+      let w = img.width, h = img.height;
+      if(w > maxWidth){
+        h = Math.round(h * (maxWidth / w));
+        w = maxWidth;
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, w, h);
+      resolve(canvas.toDataURL('image/jpeg', quality));
+    };
+    img.onerror = () => resolve(dataUrl);
+    img.src = dataUrl;
+  });
+}
+function readFileAsDataURL(file){
+  return new Promise((resolve,reject)=>{
+    const r = new FileReader();
+    r.onload = () => resolve(r.result);
+    r.onerror = reject;
+    r.readAsDataURL(file);
+  });
+}
+
+/* =========================================================
+   Claude API 연동
+========================================================= */
+const SYSTEM_PROMPT = `너는 매우 신중한 수학 채점 및 풀이 전문가다. 학생이 틀린 수학 문제 사진을 보고 아래 규칙을 반드시 지켜서 분석한다.
+
+[정확도 규칙]
+1. 사진 속 숫자, 기호, 조건을 절대 임의로 추측하지 말고 정확히 읽어라.
+2. 부호(+,-), 분수, 괄호, 지수, 제곱근, 첨자를 특히 주의해서 다시 확인하라.
+3. 문제의 일부가 잘리거나 글씨가 흐려 확신할 수 없으면 절대 추측해서 풀지 말고 readable을 false로 하고 issue에 어떤 부분이 안 보이는지 구체적으로 적어라.
+4. 풀이는 단계별로 논리적으로 작성하라.
+5. 답을 구한 뒤 반드시 원래 식/조건에 대입해서 스스로 검산하라 (이 검산 내용을 별도 필드로 출력할 필요는 없고, solution_steps 안에 자연스럽게 녹여서 답의 정확도만 높이는 데 사용하라).
+6. 학생이 자신이 쓴 답(있다면)을 알려주면, 그 답과 정답을 비교해서 구체적으로 어느 단계에서 왜 틀렸는지 설명하라. 없다면 이 유형에서 학생들이 일반적으로 틀리기 쉬운 부분을 설명하라.
+7. 수식은 LaTeX을 $ ... $ (인라인) 또는 $$ ... $$ (블록) 안에 넣어서 표현하라. MathJax로 렌더링되므로 이 형식을 반드시 지켜라.
+7-1. 매우 중요: 응답은 JSON이므로 LaTeX 명령어의 백슬래시(\)는 JSON 문자열 규칙에 따라 반드시 두 개(\\\\)로 이스케이프해서 출력하라. 예를 들어 "\sqrt{x}"가 아니라 "\\\\sqrt{x}", "\frac{1}{2}"가 아니라 "\\\\frac{1}{2}"로 써야 한다. 백슬래시를 하나만 쓰면 JSON 파싱이 깨진다.
+8. 단원은 다음 중 가장 알맞은 것을 고르거나, 마땅한 것이 없으면 새로 만들어라: 수와 연산, 문자와 식, 방정식, 부등식, 함수, 도형, 확률과 통계, 수열, 미적분.
+9. 반드시 아래 JSON 형식으로만 응답하라. 코드블록(백틱)이나 설명 문장, 다른 텍스트를 절대 앞뒤에 붙이지 마라. 순수 JSON 객체 하나만 출력하라.
+
+{
+  "readable": true 또는 false,
+  "issue": "사진을 읽을 수 없을 때 어떤 부분이 문제인지 (readable이 true면 빈 문자열)",
+  "problem_text": "문제 전문 (수식은 $..$ 사용)",
+  "unit": "단원명",
+  "difficulty": "쉬움 또는 보통 또는 어려움",
+  "confidence": "높음 또는 보통 또는 낮음 (AI 풀이 신뢰도)",
+  "correct_answer": "정확한 정답",
+  "common_mistake_area": "이 유형에서 틀리기 쉬운 부분",
+  "wrong_reason": "학생이 왜 틀렸는지에 대한 구체적 분석",
+  "key_concepts": "이 문제의 핵심 개념 설명",
+  "solution_steps": "단계별 정확한 풀이 과정 전체",
+  "key_points": "이 문제의 핵심 포인트 요약",
+  "next_caution": "다음에 비슷한 문제를 풀 때 주의할 점"
+}`;
+
+// 텍스트 안에서 첫 '{' 에 정확히 대응하는 '}' 를 찾아 JSON 부분만 잘라낸다.
+// 문자열(따옴표) 안에 있는 중괄호(\frac{1}{2} 같은 LaTeX)는 무시하고,
+// 진짜 JSON 구조의 중괄호 깊이만 센다. 끝까지 닫히지 않으면 null을 반환해서
+// "응답이 도중에 잘렸다"는 것을 구분할 수 있게 한다.
+function extractJsonObject(text){
+  const start = text.indexOf('{');
+  if(start === -1) return null;
+  let depth = 0;
+  let inString = false;
+  let pendingEscape = false;
+  for(let i=start; i<text.length; i++){
+    const ch = text[i];
+    if(inString){
+      if(pendingEscape){ pendingEscape = false; continue; }
+      if(ch === '\\'){ pendingEscape = true; continue; }
+      if(ch === '"'){ inString = false; }
+      continue;
+    }
+    if(ch === '"'){ inString = true; continue; }
+    if(ch === '{') depth++;
+    else if(ch === '}'){
+      depth--;
+      if(depth === 0) return text.slice(start, i+1);
+    }
+  }
+  return null; // 끝까지 짝이 맞는 '}' 를 못 찾음 = 응답이 잘렸을 가능성이 큼
+}
+
+async function callClaudeVision(base64DataUrl, userAnswer){
+  const apiKey = SETTINGS.apiKey;
+  const model = SETTINGS.model || 'claude-sonnet-5';
+  if(!apiKey){
+    throw new Error('NO_API_KEY');
+  }
+  const mediaMatch = base64DataUrl.match(/^data:(image\/[a-zA-Z]+);base64,(.*)$/);
+  if(!mediaMatch) throw new Error('이미지 형식을 읽을 수 없습니다.');
+  const mediaType = mediaMatch[1];
+  const base64Data = mediaMatch[2];
+
+  const userText = userAnswer && userAnswer.trim()
+    ? `이 문제를 분석해줘. 내가 쓴 답: "${userAnswer.trim()}"`
+    : `이 문제를 분석해줘. 내가 쓴 답은 따로 없어. 이 유형에서 흔히 틀리는 부분 위주로 분석해줘.`;
+
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+      'x-api-key': apiKey,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify({
+      model: model,
+      max_tokens: 8000,
+      system: SYSTEM_PROMPT,
+      messages: [{
+        role: 'user',
+        content: [
+          { type: 'image', source: { type: 'base64', media_type: mediaType, data: base64Data } },
+          { type: 'text', text: userText }
+        ]
+      }]
+    })
+  });
+
+  if(!res.ok){
+    const errText = await res.text().catch(()=> '');
+    if(res.status === 401) throw new Error('API 키가 올바르지 않습니다. 설정에서 확인해주세요.');
+    if(res.status === 429) throw new Error('요청이 너무 많습니다. 잠시 후 다시 시도해주세요.');
+    throw new Error(`API 오류 (${res.status}): ${errText.slice(0,200)}`);
+  }
+  const data = await res.json();
+  const textBlock = (data.content || []).find(c => c.type === 'text');
+  if(!textBlock) throw new Error('AI 응답을 읽을 수 없습니다.');
+
+  let raw = textBlock.text.trim();
+  raw = raw.replace(/^```json\s*/i,'').replace(/^```\s*/,'').replace(/```\s*$/,'').trim();
+  const jsonPart = extractJsonObject(raw);
+  if(!jsonPart){
+    if(data.stop_reason === 'max_tokens'){
+      throw new Error('문제가 복잡해서 AI 응답이 도중에 잘렸습니다. 다시 시도해주세요.');
+    }
+    throw new Error('AI 응답 형식이 올바르지 않습니다.');
+  }
+  raw = jsonPart;
+
+  let parsed;
+  try{
+    parsed = JSON.parse(raw);
+  }catch(e){
+    // AI가 LaTeX 백슬래시(\sqrt, \frac 등)를 JSON 이스케이프 규칙대로
+    // 두 번 쓰지 않아서 파싱이 깨지는 경우가 있어 자동으로 복구를 시도한다.
+    try{
+      parsed = JSON.parse(fixLatexJsonEscapes(raw));
+    }catch(e2){
+      throw new Error('AI 응답을 분석하는 데 실패했습니다. 다시 시도해주세요.');
+    }
+  }
+  return parsed;
+}
+
+// AI가 만든 JSON 텍스트를 한 글자씩 훑으면서 고쳐준다.
+// - 문자열(따옴표) 안에서 실제 줄바꿈/탭 같은 제어문자가 그대로 들어있으면 \n, \t 로 이스케이프
+// - 문자열 안에서 \sqrt, \frac 처럼 JSON이 모르는 백슬래시 이스케이프가 나오면
+//   그 백슬래시를 리터럴 문자로 보고 \\ 로 이스케이프 (LaTeX 문법 보존)
+function fixLatexJsonEscapes(raw){
+  let out = '';
+  let inString = false;
+  let pendingEscape = false;
+  for(let i=0; i<raw.length; i++){
+    const ch = raw[i];
+    if(!inString){
+      if(ch === '"') inString = true;
+      out += ch;
+      continue;
+    }
+    if(pendingEscape){
+      if('"\\/bfnrtu'.indexOf(ch) !== -1){
+        out += '\\' + ch; // 정상적인 JSON 이스케이프는 그대로 유지
+      }else{
+        out += '\\\\' + ch; // \sqrt, \frac 등 -> 백슬래시 자체를 이스케이프
+      }
+      pendingEscape = false;
+      continue;
+    }
+    if(ch === '\\'){ pendingEscape = true; continue; }
+    if(ch === '"'){ inString = false; out += ch; continue; }
+    if(ch === '\n'){ out += '\\n'; continue; }
+    if(ch === '\r'){ out += '\\r'; continue; }
+    if(ch === '\t'){ out += '\\t'; continue; }
+    out += ch;
+  }
+  return out;
+}
+
+/* =========================================================
+   재풀이 / 유사문제 — 저비용 텍스트 전용 API
+   (이미지 없이 텍스트만 보내고, 가장 저렴한 모델을 고정으로 써서
+    사용자의 메인 모델 설정과 무관하게 비용을 최소화한다)
+========================================================= */
+const CHEAP_MODEL = 'claude-haiku-4-5-20251001';
+
+async function callClaudeCheap(systemPrompt, userText, maxTokens){
+  const apiKey = SETTINGS.apiKey;
+  if(!apiKey) throw new Error('NO_API_KEY');
+
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+      'x-api-key': apiKey,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify({
+      model: CHEAP_MODEL,
+      max_tokens: maxTokens,
+      system: systemPrompt,
+      messages: [{ role: 'user', content: userText }]
+    })
+  });
+
+  if(!res.ok){
+    const errText = await res.text().catch(()=> '');
+    if(res.status === 401) throw new Error('API 키가 올바르지 않습니다. 설정에서 확인해주세요.');
+    if(res.status === 429) throw new Error('요청이 너무 많습니다. 잠시 후 다시 시도해주세요.');
+    throw new Error(`API 오류 (${res.status}): ${errText.slice(0,200)}`);
+  }
+  const data = await res.json();
+  const textBlock = (data.content || []).find(c => c.type === 'text');
+  if(!textBlock) throw new Error('AI 응답을 읽을 수 없습니다.');
+
+  let raw = textBlock.text.trim();
+  raw = raw.replace(/^```json\s*/i,'').replace(/^```\s*/,'').replace(/```\s*$/,'').trim();
+  const jsonPart = extractJsonObject(raw);
+  if(!jsonPart){
+    if(data.stop_reason === 'max_tokens'){
+      throw new Error('응답이 도중에 잘렸습니다. 다시 시도해주세요.');
+    }
+    throw new Error('AI 응답 형식이 올바르지 않습니다.');
+  }
+  raw = jsonPart;
+
+  let parsed;
+  try{ parsed = JSON.parse(raw); }
+  catch(e){
+    try{ parsed = JSON.parse(fixLatexJsonEscapes(raw)); }
+    catch(e2){ throw new Error('AI 응답을 분석하는 데 실패했습니다. 다시 시도해주세요.'); }
+  }
+  return parsed;
+}
+
+function normalizeAnswer(s){
+  return (s||'').toString().trim().toLowerCase().replace(/\s+/g,'').replace(/[,\.]$/,'');
+}
+
+// 두 답이 문자 그대로 같으면 API를 아예 호출하지 않고 즉시 정답 처리해서 비용을 아낀다.
+async function gradeAnswer(problemText, correctAnswer, studentAnswer){
+  const na = normalizeAnswer(studentAnswer);
+  const nb = normalizeAnswer(correctAnswer);
+  if(na && nb && na === nb){
+    return { correct: true, feedback: '정답이에요! 정확히 맞혔어요.' };
+  }
+  const sys = `너는 수학 답안 채점자다. 학생이 새로 쓴 답과 정답을 비교해서 표현 방식이 달라도(예: 1/2와 0.5, 인수분해 형태 차이 등) 수학적으로 같은 값/식이면 정답으로 판단하라.
+반드시 아래 JSON 형식으로만 응답하고, 그 외의 설명이나 코드블록은 절대 붙이지 마라. LaTeX을 쓸 경우 백슬래시는 JSON 규칙에 따라 반드시 두 번(\\\\)으로 이스케이프하라.
+{"correct": true 또는 false, "feedback": "한두 문장의 짧은 피드백. 틀렸다면 어느 부분이 왜 틀렸는지 간단히"}`;
+  const userText = `문제: ${problemText}\n정답: ${correctAnswer}\n학생이 새로 쓴 답: ${studentAnswer}`;
+  return await callClaudeCheap(sys, userText, 220);
+}
+
+async function generateSimilarProblem(p){
+  const sys = `너는 수학 문제 출제 전문가다. 주어진 원본 문제와 같은 단원·같은 핵심 개념·비슷한 난이도의 새로운 연습 문제를 하나 만들어라. 숫자와 조건은 원본과 달라야 한다.
+수식은 LaTeX을 $...$ 안에 넣어서 표현하고, 이 응답은 JSON이므로 백슬래시는 반드시 두 번(\\\\)으로 이스케이프하라(예: "\\\\sqrt{x}").
+반드시 아래 JSON 형식으로만 응답하고 다른 텍스트는 절대 출력하지 마라.
+{"problem_text": "새 문제 전문", "correct_answer": "새 문제의 정답", "solution_steps": "간단한 풀이 과정 (3~5줄 정도)"}`;
+  const userText = `원본 단원: ${p.unit}\n원본 핵심 개념: ${p.keyConcepts}\n원본 문제: ${p.problemText}`;
+  return await callClaudeCheap(sys, userText, 1500);
+}
+
+function bindDetailClose(){
+  document.getElementById('detailModalBody').querySelectorAll('[data-close]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{ document.getElementById('detailModal').style.display = 'none'; });
+  });
+}
+
+/* ---- 다시 풀기 모달 ---- */
+function openRetryModal(id){
+  const p = PROBLEMS.find(x=>x.id===id);
+  if(!p) return;
+  const lastLog = p.retryLog && p.retryLog.length ? p.retryLog[p.retryLog.length-1] : null;
+  document.getElementById('detailModalBody').innerHTML = `
+    <button class="close-x" data-close="detailModal">✕</button>
+    <h2>🔁 다시 풀기 · #${p.id}</h2>
+    <div class="sec"><div class="sec-label">문제</div><div class="sec-body">${escapeHtml(p.problemText)}</div></div>
+    ${lastLog ? `<div class="settings-note" style="margin-bottom:10px;">이전 시도 ${p.retryLog.length}회 · 최근 결과: ${lastLog.correct ? '✅ 정답' : '❌ 오답'}</div>` : ''}
+    <div class="field">
+      <label>이번엔 어떻게 풀었나요? 답을 적어보세요</label>
+      <input type="text" id="retryAnswerInput" placeholder="예: x=5">
+    </div>
+    <button class="primary-btn" id="btnGradeRetry">채점하기</button>
+    <div id="retryResultArea" style="margin-top:12px;"></div>
+  `;
+  document.getElementById('detailModal').style.display = 'flex';
+  bindDetailClose();
+  typesetMath();
+
+  document.getElementById('btnGradeRetry').addEventListener('click', async ()=>{
+    const input = document.getElementById('retryAnswerInput');
+    const ans = input.value.trim();
+    if(!ans){ toast('답을 입력해주세요.'); return; }
+    const btn = document.getElementById('btnGradeRetry');
+    btn.disabled = true; btn.textContent = '채점 중...';
+    try{
+      const result = await gradeAnswer(p.problemText, p.correctAnswer, ans);
+      p.retryLog = p.retryLog || [];
+      p.retryLog.push({ date: new Date().toISOString(), answer: ans, correct: !!result.correct, feedback: result.feedback||'' });
+      saveProblems(PROBLEMS);
+      document.getElementById('retryResultArea').innerHTML = `
+        <div class="sec ${result.correct ? 'answer' : 'wrong'}">
+          <div class="sec-label">${result.correct ? '✅ 정답이에요!' : '❌ 아직 아니에요'}</div>
+          <div class="sec-body">${escapeHtml(result.feedback||'')}</div>
+        </div>
+        ${!result.correct ? `<div class="sec"><div class="sec-label">정답</div><div class="sec-body">${escapeHtml(p.correctAnswer)}</div></div>` : ''}`;
+      typesetMath();
+    }catch(err){
+      let msg = err && err.message === 'NO_API_KEY'
+        ? '설정에서 Anthropic API 키를 먼저 등록해주세요.'
+        : (err && err.message) || '채점 중 오류가 발생했어요.';
+      document.getElementById('retryResultArea').innerHTML = `<div class="error-box">😥 ${escapeHtml(msg)}</div>`;
+    }finally{
+      btn.disabled = false; btn.textContent = '채점하기';
+    }
+  });
+}
+
+/* ---- 비슷한 문제 모달 ---- */
+function openSimilarModal(id){
+  const p = PROBLEMS.find(x=>x.id===id);
+  if(!p) return;
+  document.getElementById('detailModalBody').innerHTML = `
+    <button class="close-x" data-close="detailModal">✕</button>
+    <h2>✨ 비슷한 문제 · #${p.id}</h2>
+    <div id="similarBody"></div>
+  `;
+  document.getElementById('detailModal').style.display = 'flex';
+  bindDetailClose();
+  loadSimilar(p);
+}
+
+async function loadSimilar(p){
+  const body = document.getElementById('similarBody');
+  body.innerHTML = `<div class="progress-wrap"><div class="spin"></div><div style="text-align:center;color:var(--sub);font-size:13px;">비슷한 문제를 만드는 중...</div></div>`;
+  let gen;
+  try{
+    gen = await generateSimilarProblem(p);
+  }catch(err){
+    let msg = err && err.message === 'NO_API_KEY'
+      ? '설정에서 Anthropic API 키를 먼저 등록해주세요.'
+      : (err && err.message) || '문제를 만드는 중 오류가 발생했어요.';
+    body.innerHTML = `<div class="error-box">😥 ${escapeHtml(msg)}</div><button class="secondary-btn" id="btnRetrySimilarGen">다시 시도</button>`;
+    document.getElementById('btnRetrySimilarGen').addEventListener('click', ()=> loadSimilar(p));
+    return;
+  }
+  body.innerHTML = `
+    <div class="sec"><div class="sec-label">새 문제</div><div class="sec-body">${escapeHtml(gen.problem_text||'')}</div></div>
+    <div class="field">
+      <label>답을 적어보세요</label>
+      <input type="text" id="similarAnswerInput" placeholder="예: x=5">
+    </div>
+    <button class="primary-btn" id="btnGradeSimilar">채점하기</button>
+    <button class="secondary-btn" id="btnRegenSimilar">🔄 다른 문제 만들기</button>
+    <div id="similarResultArea" style="margin-top:12px;"></div>
+  `;
+  typesetMath();
+  document.getElementById('btnRegenSimilar').addEventListener('click', ()=> loadSimilar(p));
+  document.getElementById('btnGradeSimilar').addEventListener('click', async ()=>{
+    const input = document.getElementById('similarAnswerInput');
+    const ans = input.value.trim();
+    if(!ans){ toast('답을 입력해주세요.'); return; }
+    const btn = document.getElementById('btnGradeSimilar');
+    btn.disabled = true; btn.textContent = '채점 중...';
+    try{
+      const result = await gradeAnswer(gen.problem_text, gen.correct_answer, ans);
+      document.getElementById('similarResultArea').innerHTML = `
+        <div class="sec ${result.correct ? 'answer' : 'wrong'}">
+          <div class="sec-label">${result.correct ? '✅ 정답이에요!' : '❌ 아직 아니에요'}</div>
+          <div class="sec-body">${escapeHtml(result.feedback||'')}</div>
+        </div>
+        <div class="sec"><div class="sec-label">정답</div><div class="sec-body">${escapeHtml(gen.correct_answer||'')}</div></div>
+        ${gen.solution_steps ? `<div class="sec"><div class="sec-label">풀이</div><div class="sec-body">${escapeHtml(gen.solution_steps)}</div></div>` : ''}`;
+      typesetMath();
+    }catch(err){
+      let msg = err && err.message === 'NO_API_KEY'
+        ? '설정에서 Anthropic API 키를 먼저 등록해주세요.'
+        : (err && err.message) || '채점 중 오류가 발생했어요.';
+      document.getElementById('similarResultArea').innerHTML = `<div class="error-box">😥 ${escapeHtml(msg)}</div>`;
+    }finally{
+      btn.disabled = false; btn.textContent = '채점하기';
+    }
+  });
+}
+
+/* =========================================================
+   중복 검사
+========================================================= */
+function findDuplicate(imageHash, problemText){
+  for(const p of PROBLEMS){
+    if(p.imageHash === imageHash) return p;
+    if(problemText && jaccardSimilarity(p.problemText, problemText) > 0.82) return p;
+  }
+  return null;
+}
+
+/* =========================================================
+   렌더링 - 탭 / 뷰
+========================================================= */
+let currentTab = 'all';
+let searchQuery = '';
+let unitFilter = null;
+
+const tabbar = document.getElementById('tabbar');
+tabbar.addEventListener('click', (e)=>{
+  const tab = e.target.closest('.tab');
+  if(!tab) return;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  tab.classList.add('active');
+  currentTab = tab.dataset.tab;
+  unitFilter = null;
+  render();
+});
+
+function render(){
+  const area = document.getElementById('viewArea');
+  if(currentTab === 'all') area.innerHTML = renderListView(PROBLEMS.slice().reverse(), true);
+  else if(currentTab === 'recent') area.innerHTML = renderListView(PROBLEMS.filter(p=>daysAgo(p.dateAdded)<=7).slice().reverse(), false, '최근 7일 동안 추가된 오답이 없어요.');
+  else if(currentTab === 'unit') area.innerHTML = renderUnitView();
+  else if(currentTab === 'mistake') area.innerHTML = renderStatsView();
+  else if(currentTab === 'review') area.innerHTML = renderReviewIntro();
+  bindListEvents();
+  typesetMath();
+}
+
+function renderListView(list, showSearch, emptyMsg){
+  let html = '';
+  if(showSearch){
+    html += `
+      <div class="searchbar">
+        <input type="text" id="searchInput" placeholder="예: 함수, 부호 실수, 3번, √ ..." value="${escapeHtml(searchQuery)}">
+      </div>`;
+  }
+  let filtered = list;
+  if(searchQuery.trim()){
+    const q = searchQuery.trim().toLowerCase();
+    filtered = filtered.filter(p => {
+      const hay = [p.problemText,p.unit,p.correctAnswer,p.wrongReason,p.commonMistakeArea,p.keyConcepts,'#'+p.id].join(' ').toLowerCase();
+      return hay.includes(q);
+    });
+  }
+  if(unitFilter){
+    filtered = filtered.filter(p => p.unit === unitFilter);
+    html += `<div class="chip active" style="display:inline-block;margin-bottom:12px;" id="clearUnitFilter">✕ ${escapeHtml(unitFilter)} 필터 해제</div>`;
+  }
+  if(filtered.length === 0){
+    html += `<div class="empty"><div class="big">🗒️</div>${escapeHtml(emptyMsg || '아직 저장된 오답이 없어요. 아래 📸 버튼으로 첫 문제를 추가해보세요!')}</div>`;
+    return html;
+  }
+  html += filtered.map(cardHtml).join('');
+  return html;
+}
+
+function cardHtml(p){
+  return `
+  <div class="card" data-id="${p.id}">
+    <div class="card-head" data-toggle="${p.id}">
+      <div class="badge">#${p.id}</div>
+      <div class="meta">
+        <div class="title">${escapeHtml(p.problemText).slice(0,40)}${p.problemText.length>40?'…':''}</div>
+        <div class="sub">${escapeHtml(p.unit)} · ${fmtDate(p.dateAdded)} · 신뢰도 ${escapeHtml(p.confidence||'-')}${p.retryLog && p.retryLog.length ? ` · 재풀이 ${p.retryLog.length}회${p.retryLog[p.retryLog.length-1].correct ? ' ✅' : ''}` : ''}</div>
+      </div>
+      <div class="chev">▾</div>
+    </div>
+    <div class="card-body">
+      ${p.imageData ? `<img class="problem-img" src="${p.imageData}">` : ''}
+      <div class="sec"><div class="sec-label">문제</div><div class="sec-body">${escapeHtml(p.problemText)}</div></div>
+      <div class="sec answer"><div class="sec-label">✅ 정답</div><div class="sec-body">${escapeHtml(p.correctAnswer)}</div></div>
+      ${p.userAnswer ? `<div class="sec"><div class="sec-label">내가 쓴 답</div><div class="sec-body">${escapeHtml(p.userAnswer)}</div></div>` : ''}
+      <div class="sec wrong"><div class="sec-label">❌ 틀린 이유</div><div class="sec-body">${escapeHtml(p.wrongReason)}</div></div>
+      <div class="sec"><div class="sec-label">틀리기 쉬운 부분</div><div class="sec-body">${escapeHtml(p.commonMistakeArea)}</div></div>
+      <div class="sec concept"><div class="sec-label">🧠 핵심 개념</div><div class="sec-body">${escapeHtml(p.keyConcepts)}</div></div>
+      <div class="sec"><div class="sec-label">🧮 정확한 풀이</div><div class="sec-body">${escapeHtml(p.solutionSteps)}</div></div>
+      <div class="sec"><div class="sec-label">핵심 포인트</div><div class="sec-body">${escapeHtml(p.keyPoints)}</div></div>
+      <div class="sec caution"><div class="sec-label">⚠️ 다음에 주의할 점</div><div class="sec-body">${escapeHtml(p.nextCaution)}</div></div>
+      <div class="sec"><div class="sec-label">단원 · 난이도</div><div class="sec-body">${escapeHtml(p.unit)} · ${escapeHtml(p.difficulty)}</div></div>
+      <div class="card-foot">
+        <button class="small-btn" data-retry="${p.id}">🔁 다시 풀기</button>
+        <button class="small-btn" data-similar="${p.id}">✨ 비슷한 문제</button>
+        <button class="small-btn danger" data-del="${p.id}">🗑 삭제</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function bindListEvents(){
+  document.querySelectorAll('[data-toggle]').forEach(el=>{
+    el.addEventListener('click', ()=>{
+      el.parentElement.classList.toggle('open');
+      typesetMath();
+    });
+  });
+  document.querySelectorAll('[data-retry]').forEach(el=>{
+    el.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      openRetryModal(Number(el.dataset.retry));
+    });
+  });
+  document.querySelectorAll('[data-similar]').forEach(el=>{
+    el.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      openSimilarModal(Number(el.dataset.similar));
+    });
+  });
+  document.querySelectorAll('[data-del]').forEach(el=>{
+    el.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      const id = Number(el.dataset.del);
+      if(confirm(`#${id} 문제를 정말 삭제할까요?`)){
+        PROBLEMS = PROBLEMS.filter(p=>p.id!==id);
+        saveProblems(PROBLEMS);
+        toast('삭제했어요.');
+        render();
+      }
+    });
+  });
+  const search = document.getElementById('searchInput');
+  if(search){
+    search.addEventListener('input', ()=>{
+      searchQuery = search.value;
+      const pos = search.selectionStart;
+      render();
+      const s2 = document.getElementById('searchInput');
+      if(s2){ s2.focus(); s2.setSelectionRange(pos,pos); }
+    });
+  }
+  const clearBtn = document.getElementById('clearUnitFilter');
+  if(clearBtn){
+    clearBtn.addEventListener('click', ()=>{ unitFilter=null; render(); });
+  }
+}
+
+function renderUnitView(){
+  const units = {};
+  PROBLEMS.forEach(p=>{ units[p.unit] = (units[p.unit]||0)+1; });
+  const entries = Object.entries(units).sort((a,b)=>b[1]-a[1]);
+  if(entries.length===0){
+    return `<div class="empty"><div class="big">📂</div>아직 단원별로 분류된 오답이 없어요.</div>`;
+  }
+  let html = `<div class="stat-list"><h3>단원별 오답 수</h3>`;
+  html += entries.map(([unit,count])=>`
+    <div class="row" data-unit="${escapeHtml(unit)}" style="cursor:pointer;">
+      <span>${escapeHtml(unit)}</span><span><strong>${count}</strong>문제 ›</span>
+    </div>`).join('');
+  html += `</div>`;
+  html += renderListView(PROBLEMS.slice().reverse(), true);
+  setTimeout(()=>{
+    document.querySelectorAll('[data-unit]').forEach(el=>{
+      el.addEventListener('click', ()=>{
+        unitFilter = el.dataset.unit;
+        render();
+      });
+    });
+  },0);
+  return html;
+}
+
+function renderStatsView(){
+  const total = PROBLEMS.length;
+  const unitCount = {};
+  const mistakeCount = {};
+  let last7 = 0;
+  PROBLEMS.forEach(p=>{
+    unitCount[p.unit] = (unitCount[p.unit]||0)+1;
+    const key = (p.commonMistakeArea||'').trim() || (p.wrongReason||'').trim();
+    if(key){
+      const shortKey = key.length > 18 ? key.slice(0,18)+'…' : key;
+      mistakeCount[shortKey] = (mistakeCount[shortKey]||0)+1;
+    }
+    if(daysAgo(p.dateAdded) <= 7) last7++;
+  });
+  const topUnit = Object.entries(unitCount).sort((a,b)=>b[1]-a[1])[0];
+  const topMistakes = Object.entries(mistakeCount).sort((a,b)=>b[1]-a[1]).slice(0,5);
+
+  if(total===0){
+    return `<div class="empty"><div class="big">📊</div>오답이 쌓이면 통계가 여기 표시돼요.</div>`;
+  }
+
+  let html = `
+  <div class="stats-grid">
+    <div class="stat-card"><div class="num">${total}</div><div class="label">총 오답 문제</div></div>
+    <div class="stat-card"><div class="num">${last7}</div><div class="label">최근 7일 추가</div></div>
+  </div>
+  <div class="stat-list">
+    <h3>가장 많이 틀린 단원</h3>
+    <div class="row"><span>${topUnit ? escapeHtml(topUnit[0]) : '-'}</span><span><strong>${topUnit ? topUnit[1] : 0}</strong>문제</span></div>
+  </div>
+  <div class="stat-list">
+    <h3>자주 하는 실수 Top 5</h3>
+    ${topMistakes.length ? topMistakes.map(([k,v])=>`<div class="row"><span>${escapeHtml(k)}</span><span><strong>${v}</strong>회</span></div>`).join('') : '<div class="row"><span>데이터가 부족해요</span></div>'}
+  </div>`;
+  return html;
+}
+
+/* =========================================================
+   복습 모드
+========================================================= */
+let reviewSet = [];
+let reviewIndex = 0;
+
+function renderReviewIntro(){
+  if(PROBLEMS.length === 0){
+    return `<div class="empty"><div class="big">🎯</div>복습할 오답이 아직 없어요. 먼저 문제를 추가해보세요!</div>`;
+  }
+  return `
+  <div class="empty">
+    <div class="big">🎯</div>
+    <p>저장된 오답 중 몇 문제를 랜덤으로 골라 다시 풀어봐요.<br>정답은 먼저 스스로 풀어본 뒤에 확인하세요.</p>
+    <button class="primary-btn" id="btnStartReview" style="max-width:280px;">오늘 복습 시작하기</button>
+  </div>`;
+}
+
+document.getElementById('viewArea').addEventListener('click', (e)=>{
+  if(e.target && e.target.id === 'btnStartReview'){
+    const count = Math.min(5, PROBLEMS.length);
+    reviewSet = PROBLEMS.slice().sort(()=>Math.random()-0.5).slice(0,count);
+    reviewIndex = 0;
+    showReviewCard();
+  }
+});
+
+function showReviewCard(){
+  const area = document.getElementById('viewArea');
+  if(reviewIndex >= reviewSet.length){
+    area.innerHTML = `<div class="empty"><div class="big">🎉</div>오늘 복습을 모두 마쳤어요!<br><button class="primary-btn" id="btnStartReview" style="max-width:280px;margin-top:14px;">다시 하기</button></div>`;
+    return;
+  }
+  const p = reviewSet[reviewIndex];
+  area.innerHTML = `
+  <div class="review-q">
+    <div class="sub" style="color:var(--sub);font-size:12.5px;margin-bottom:6px;">${reviewIndex+1} / ${reviewSet.length} · ${escapeHtml(p.unit)}</div>
+    ${p.imageData ? `<img src="${p.imageData}">` : ''}
+    <div class="sec"><div class="sec-label">문제</div><div class="sec-body">${escapeHtml(p.problemText)}</div></div>
+    <div id="reviewAnswerArea"></div>
+    <button class="primary-btn" id="btnShowAnswer">정답 보기</button>
+  </div>`;
+  typesetMath();
+  document.getElementById('btnShowAnswer').addEventListener('click', ()=>{
+    document.getElementById('reviewAnswerArea').innerHTML = `
+      <div class="sec answer"><div class="sec-label">✅ 정답</div><div class="sec-body">${escapeHtml(p.correctAnswer)}</div></div>
+      <div class="sec"><div class="sec-label">🧮 정확한 풀이</div><div class="sec-body">${escapeHtml(p.solutionSteps)}</div></div>
+      <div class="sec wrong"><div class="sec-label">❌ 틀린 이유(그때 분석)</div><div class="sec-body">${escapeHtml(p.wrongReason)}</div></div>
+      <div class="sec caution"><div class="sec-label">⚠️ 주의할 점</div><div class="sec-body">${escapeHtml(p.nextCaution)}</div></div>`;
+    typesetMath();
+    document.getElementById('btnShowAnswer').outerHTML = `<button class="primary-btn" id="btnNextReview">다음 문제 →</button>`;
+    document.getElementById('btnNextReview').addEventListener('click', ()=>{
+      reviewIndex++;
+      showReviewCard();
+    });
+  });
+}
+
+/* =========================================================
+   문제 추가 플로우
+========================================================= */
+const addModal = document.getElementById('addModal');
+const uploadBox = document.getElementById('uploadBox');
+const fileInput = document.getElementById('fileInput');
+const previewImg = document.getElementById('previewImg');
+const uploadPlaceholder = document.getElementById('uploadPlaceholder');
+const btnAnalyze = document.getElementById('btnAnalyze');
+let pendingImageData = null;
+
+document.getElementById('btnAdd').addEventListener('click', ()=>{
+  resetAddModal();
+  addModal.style.display = 'flex';
+});
+uploadBox.addEventListener('click', ()=> fileInput.click());
+fileInput.addEventListener('change', async ()=>{
+  const file = fileInput.files[0];
+  if(!file) return;
+  const raw = await readFileAsDataURL(file);
+  pendingImageData = await compressImage(raw);
+  previewImg.src = pendingImageData;
+  previewImg.style.display = 'block';
+  uploadPlaceholder.style.display = 'none';
+  btnAnalyze.disabled = false;
+});
+
+function resetAddModal(){
+  document.getElementById('addStep1').style.display = 'block';
+  document.getElementById('addStep2').style.display = 'none';
+  document.getElementById('addStep3').style.display = 'none';
+  previewImg.style.display = 'none';
+  uploadPlaceholder.style.display = 'block';
+  fileInput.value = '';
+  document.getElementById('userAnswerInput').value = '';
+  btnAnalyze.disabled = true;
+  pendingImageData = null;
+}
+
+const STEP_LABELS = ['문제를 읽는 중...', '풀이하는 중...', '오답노트에 저장하는 중...'];
+function renderProgressSteps(activeIndex){
+  const wrap = document.getElementById('progressSteps');
+  wrap.innerHTML = STEP_LABELS.map((label,i)=>{
+    let cls = '';
+    if(i < activeIndex) cls = 'done';
+    else if(i === activeIndex) cls = 'active';
+    return `<div class="step ${cls}"><span class="dot"></span>${label}</div>`;
+  }).join('');
+}
+
+btnAnalyze.addEventListener('click', async ()=>{
+  if(!pendingImageData) return;
+  if(!SETTINGS.apiKey){
+    document.getElementById('addStep1').style.display = 'none';
+    document.getElementById('addStep3').style.display = 'block';
+    document.getElementById('addStep3').innerHTML = `
+      <div class="error-box">먼저 설정(⚙️)에서 Anthropic API 키를 등록해주세요.</div>
+      <button class="secondary-btn" data-close="addModal">닫기</button>`;
+    bindCloseButtons();
+    return;
+  }
+  const userAnswer = document.getElementById('userAnswerInput').value;
+  document.getElementById('addStep1').style.display = 'none';
+  document.getElementById('addStep2').style.display = 'block';
+  renderProgressSteps(0);
+
+  const stepTimer = setInterval(()=>{
+    const steps = document.querySelectorAll('.progress-steps .step');
+    let cur = -1;
+    steps.forEach((s,i)=>{ if(s.classList.contains('active')) cur = i; });
+    if(cur < STEP_LABELS.length - 2){
+      renderProgressSteps(cur+2 > STEP_LABELS.length-1 ? STEP_LABELS.length-1 : cur+1);
+    }
+  }, 1600);
+
+  try{
+    const result = await callClaudeVision(pendingImageData, userAnswer);
+    clearInterval(stepTimer);
+    renderProgressSteps(3);
+
+    if(result.readable === false){
+      document.getElementById('addStep2').style.display = 'none';
+      document.getElementById('addStep3').style.display = 'block';
+      document.getElementById('addStep3').innerHTML = `
+        <div class="warn-box">📷 사진을 정확히 읽을 수 없어요.<br><br>${escapeHtml(result.issue || '문제의 일부가 잘리거나 흐릿한 것 같아요.')}<br><br>해당 부분이 잘 보이도록 다시 촬영해서 올려주세요.</div>
+        <button class="secondary-btn" id="btnRetake">다시 촬영하기</button>`;
+      document.getElementById('btnRetake').addEventListener('click', resetAddModal2);
+      return;
+    }
+
+    const imageHash = djb2(pendingImageData.slice(0,5000) + pendingImageData.length);
+    const dup = findDuplicate(imageHash, result.problem_text);
+
+    document.getElementById('addStep2').style.display = 'none';
+    document.getElementById('addStep3').style.display = 'block';
+
+    if(dup){
+      document.getElementById('addStep3').innerHTML = `
+        <div class="warn-box">⚠️ 이미 오답노트에 있는 문제일 가능성이 높습니다. (#${dup.id}와 유사)<br><br>그래도 새 문제로 저장할까요?</div>
+        <div class="duo-btns">
+          <button class="secondary-btn" id="btnCancelDup">취소</button>
+          <button class="primary-btn" id="btnSaveDup" style="margin-top:0;">그래도 저장</button>
+        </div>`;
+      document.getElementById('btnCancelDup').addEventListener('click', ()=>{ addModal.style.display='none'; });
+      document.getElementById('btnSaveDup').addEventListener('click', ()=>{
+        saveNewProblem(result, pendingImageData, imageHash, userAnswer);
+        addModal.style.display = 'none';
+        toast('오답노트에 저장했어요!');
+        render();
+      });
+    }else{
+      saveNewProblem(result, pendingImageData, imageHash, userAnswer);
+      addModal.style.display = 'none';
+      toast('오답노트에 저장했어요!');
+      render();
+    }
+  }catch(err){
+    clearInterval(stepTimer);
+    document.getElementById('addStep2').style.display = 'none';
+    document.getElementById('addStep3').style.display = 'block';
+    let msg = err && err.message === 'NO_API_KEY'
+      ? '설정에서 Anthropic API 키를 먼저 등록해주세요.'
+      : (err && err.message) || '분석 중 오류가 발생했어요.';
+    document.getElementById('addStep3').innerHTML = `
+      <div class="error-box">😥 ${escapeHtml(msg)}</div>
+      <button class="secondary-btn" id="btnRetry2">다시 시도</button>`;
+    document.getElementById('btnRetry2').addEventListener('click', resetAddModal2);
+  }
+});
+
+function resetAddModal2(){
+  document.getElementById('addStep1').style.display = 'block';
+  document.getElementById('addStep3').style.display = 'none';
+}
+
+function saveNewProblem(result, imageData, imageHash, userAnswer){
+  const problem = {
+    id: nextId(),
+    dateAdded: new Date().toISOString(),
+    imageData: imageData,
+    imageHash: imageHash,
+    problemText: result.problem_text || '',
+    unit: result.unit || '기타',
+    difficulty: result.difficulty || '보통',
+    confidence: result.confidence || '보통',
+    userAnswer: userAnswer || '',
+    correctAnswer: result.correct_answer || '',
+    commonMistakeArea: result.common_mistake_area || '',
+    wrongReason: result.wrong_reason || '',
+    keyConcepts: result.key_concepts || '',
+    solutionSteps: result.solution_steps || '',
+    keyPoints: result.key_points || '',
+    nextCaution: result.next_caution || ''
+  };
+  PROBLEMS.push(problem);
+  saveProblems(PROBLEMS);
+}
+
+/* =========================================================
+   설정 모달
+========================================================= */
+const settingsModal = document.getElementById('settingsModal');
+document.getElementById('btnSettings').addEventListener('click', ()=>{
+  document.getElementById('apiKeyInput').value = SETTINGS.apiKey || '';
+  document.getElementById('modelSelect').value = SETTINGS.model || 'claude-sonnet-5';
+  settingsModal.style.display = 'flex';
+});
+document.getElementById('btnSaveSettings').addEventListener('click', ()=>{
+  SETTINGS.apiKey = document.getElementById('apiKeyInput').value.trim();
+  SETTINGS.model = document.getElementById('modelSelect').value;
+  saveSettings(SETTINGS);
+  toast('설정을 저장했어요.');
+  settingsModal.style.display = 'none';
+});
+
+function bindCloseButtons(){
+  document.querySelectorAll('[data-close]').forEach(btn=>{
+    btn.onclick = ()=>{ document.getElementById(btn.dataset.close).style.display = 'none'; };
+  });
+}
+bindCloseButtons();
+document.querySelectorAll('.modal-overlay').forEach(ov=>{
+  ov.addEventListener('click', (e)=>{
+    if(e.target === ov) ov.style.display = 'none';
+  });
+});
+
+/* =========================================================
+   백업 / 내보내기
+========================================================= */
+function downloadBlob(content, filename, type){
+  const blob = new Blob([content], {type});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+document.getElementById('btnExportJson').addEventListener('click', ()=>{
+  downloadBlob(JSON.stringify(PROBLEMS, null, 2), `math-note-backup-${Date.now()}.json`, 'application/json');
+  toast('JSON으로 내보냈어요.');
+});
+
+document.getElementById('btnExportCsv').addEventListener('click', ()=>{
+  const cols = ['id','dateAdded','unit','difficulty','confidence','problemText','userAnswer','correctAnswer','commonMistakeArea','wrongReason','keyConcepts','solutionSteps','keyPoints','nextCaution'];
+  const esc = v => `"${String(v||'').replace(/"/g,'""')}"`;
+  let csv = cols.join(',') + '\n';
+  PROBLEMS.forEach(p=>{
+    csv += cols.map(c=>esc(p[c])).join(',') + '\n';
+  });
+  downloadBlob('\uFEFF'+csv, `math-note-${Date.now()}.csv`, 'text/csv;charset=utf-8');
+  toast('CSV로 내보냈어요.');
+});
+
+function buildMarkdown(){
+  let md = `# 📚 수학 오답노트\n\n총 ${PROBLEMS.length}문제 · 내보낸 날짜: ${fmtDate(new Date().toISOString())}\n\n---\n\n`;
+  PROBLEMS.forEach(p=>{
+    md += `## #${p.id} · ${p.unit} · ${fmtDate(p.dateAdded)}\n\n`;
+    md += `**문제**\n\n${p.problemText}\n\n`;
+    md += `**정답:** ${p.correctAnswer}\n\n`;
+    if(p.userAnswer) md += `**내가 쓴 답:** ${p.userAnswer}\n\n`;
+    md += `**틀린 이유**\n\n${p.wrongReason}\n\n`;
+    md += `**핵심 개념**\n\n${p.keyConcepts}\n\n`;
+    md += `**정확한 풀이**\n\n${p.solutionSteps}\n\n`;
+    md += `**다음에 주의할 점**\n\n${p.nextCaution}\n\n`;
+    md += `---\n\n`;
+  });
+  return md;
+}
+document.getElementById('btnExportMd').addEventListener('click', ()=>{
+  downloadBlob(buildMarkdown(), `math-note-${Date.now()}.md`, 'text/markdown;charset=utf-8');
+  toast('Markdown으로 내보냈어요.');
+});
+
+document.getElementById('btnExportPdf').addEventListener('click', ()=>{
+  const w = window.open('', '_blank');
+  const body = PROBLEMS.map(p => `
+    <div style="page-break-inside:avoid;border-bottom:2px solid #ddd;padding:18px 0;">
+      <h2>#${p.id} · ${escapeHtml(p.unit)} · ${fmtDate(p.dateAdded)}</h2>
+      ${p.imageData ? `<img src="${p.imageData}" style="max-width:100%;max-height:300px;">` : ''}
+      <p><strong>문제</strong><br>${escapeHtml(p.problemText).replace(/\n/g,'<br>')}</p>
+      <p><strong>정답:</strong> ${escapeHtml(p.correctAnswer)}</p>
+      <p><strong>틀린 이유</strong><br>${escapeHtml(p.wrongReason).replace(/\n/g,'<br>')}</p>
+      <p><strong>핵심 개념</strong><br>${escapeHtml(p.keyConcepts).replace(/\n/g,'<br>')}</p>
+      <p><strong>정확한 풀이</strong><br>${escapeHtml(p.solutionSteps).replace(/\n/g,'<br>')}</p>
+      <p><strong>다음에 주의할 점</strong><br>${escapeHtml(p.nextCaution).replace(/\n/g,'<br>')}</p>
+    </div>`).join('');
+  w.document.write(`
+    <html><head><meta charset="UTF-8"><title>수학 오답노트</title>
+    <script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};<\/script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js"><\/script>
+    <style>body{font-family:sans-serif;padding:24px;color:#222;} h2{font-size:16px;} p{font-size:14px;line-height:1.6;}</style>
+    </head><body><h1>📚 수학 오답노트 (총 ${PROBLEMS.length}문제)</h1>${body}
+    <script>window.onload=()=>setTimeout(()=>window.print(),800);<\/script>
+    </body></html>`);
+  w.document.close();
+});
+
+document.getElementById('importJsonInput').addEventListener('change', async (e)=>{
+  const file = e.target.files[0];
+  if(!file) return;
+  try{
+    const text = await file.text();
+    const imported = JSON.parse(text);
+    if(!Array.isArray(imported)) throw new Error('형식 오류');
+    if(confirm(`${imported.length}개의 문제를 불러옵니다. 기존 데이터와 합칠까요? (취소 시 덮어쓰기)`)){
+      const existingIds = new Set(PROBLEMS.map(p=>p.id));
+      let nid = nextId();
+      imported.forEach(p=>{
+        if(existingIds.has(p.id)){ p.id = nid++; }
+        PROBLEMS.push(p);
+      });
+    }else{
+      PROBLEMS = imported;
+    }
+    saveProblems(PROBLEMS);
+    toast('불러오기를 완료했어요.');
+    settingsModal.style.display = 'none';
+    render();
+  }catch(err){
+    alert('JSON 파일을 읽는 데 실패했어요.');
+  }
+});
+
+/* =========================================================
+   초기화
+========================================================= */
+render();
+</script>
+</body>
+</html>
